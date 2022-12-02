@@ -1,14 +1,20 @@
-# countries
-Java Code Challenge
+# Getting Started
 
-## Applications
+## Docker
+To run the application, docker must be installed.
+You can verify it's installed correctly with command `docker -v`.
 
-To run application, start the CountriesApplication.
-CountriesApplication runs locally on port 8080.
+## Running the application
+You need to open the terminal pointing to the project directory and run the command: `docker-compose up --build`.
+The application will start on port **8080**.
 
-## Postman
+## Endpoint
+You can use any tool to call the 'routing' endpoint of the 'countries' application (e.g. Postman or Insomnia).
+The endpoint can be called on localhost URL: `http://localhost:8080/countries/routing/{origin}/{destionation}`, 
+where source and destination are country codes.
 
-Please find the postman.json configuration file in the project root, which contains endpoints information.
+### Example
+`http://localhost:8080/countries/routing/CZE/ITA`
 
 ### Reference Documentation
 For further reference, please consider the following sections:
