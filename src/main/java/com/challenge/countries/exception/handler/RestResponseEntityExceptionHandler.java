@@ -28,6 +28,12 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
     response.sendError(HttpStatus.BAD_REQUEST.value());
   }
 
+  /**
+   * Exception handler for exceptions as route not found and country not found.
+   *
+   * @param runtimeException parent of the custom exceptions
+   * @return Bad Request ResponseEntity with exception message
+   */
   @ResponseBody
   @ExceptionHandler({RouteNotFoundException.class, CountryNotFoundException.class})
   ResponseEntity<Map<String, String>> routeNotFoundException(RuntimeException runtimeException) {
