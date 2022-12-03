@@ -1,5 +1,6 @@
 package com.challenge.countries.controller;
 
+import com.challenge.countries.dto.RoutingResponseDto;
 import com.challenge.countries.service.RoutingService;
 import javax.inject.Inject;
 import javax.validation.constraints.NotBlank;
@@ -17,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Validated
 public class RoutingController {
 
-  private RoutingService routingService;
+  private final RoutingService routingService;
 
   @Inject
   public RoutingController(RoutingService routingService) {
@@ -28,14 +29,14 @@ public class RoutingController {
    * Finds the shortest land route between specified countries (source and destination).
    * If land route is not possible, returns HTTP status 400 (Bad Request).
    *
-   * @param origin country origin (3 letter code - cca3)
-   * @param destination country destination (3 letter code - cca3)
+   * @param origin origin country (3 letter code - cca3)
+   * @param destination destination country (3 letter code - cca3)
    * @return shortest land route between specified countries
    */
   @GetMapping("/routing/{origin}/{destination}")
-  public ResponseEntity<String> getTripWaypointById(
+  public ResponseEntity<RoutingResponseDto> getRouteByOriginAndDestination(
       @PathVariable("origin") @NotBlank @Size(min = 3, max = 3) String origin,
       @PathVariable("destination") @NotBlank @Size(min = 3, max = 3) String destination) {
-    return ResponseEntity.ok("origin=" + origin + ",destination=" + destination);
+    return ResponseEntity.ok(routingService.getShortestRoute(origin, destination));
   }
 }

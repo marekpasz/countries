@@ -1,11 +1,17 @@
 package com.challenge.countries.exception.handler;
 
+import com.challenge.countries.exception.CountryNotFoundException;
+import com.challenge.countries.exception.RouteNotFoundException;
 import java.io.IOException;
+import java.util.Collections;
+import java.util.Map;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 @ControllerAdvice
@@ -20,5 +26,11 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
   @ExceptionHandler(ConstraintViolationException.class)
   public void constraintViolationException(HttpServletResponse response) throws IOException {
     response.sendError(HttpStatus.BAD_REQUEST.value());
+  }
+
+  @ResponseBody
+  @ExceptionHandler({RouteNotFoundException.class, CountryNotFoundException.class})
+  ResponseEntity<Map<String, String>> routeNotFoundException(RuntimeException runtimeException) {
+    return ResponseEntity.badRequest().body(Collections.singletonMap("message", runtimeException.getMessage()));
   }
 }
