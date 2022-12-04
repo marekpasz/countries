@@ -1,8 +1,7 @@
 # Getting Started
 
 ## Prerequisites
-
-As a prerequisite you need to have installed Java 11 and Apache Maven 3.x.x+.
+As a prerequisite you need to have installed Java 11 and Apache Maven 3+.
 After the installation you can check in the terminal with command `java -version` and `mvn -v`.
 
 ### Docker

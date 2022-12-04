@@ -46,10 +46,14 @@ public class RoutingService {
       throw new RouteNotFoundException(origin, destination);
     }
 
-    logger.info("The shortest routes is: {}", shortestPath.getVertexList());
+    logger.info("The shortest route is: {}", shortestPath.getVertexList());
     return new RoutingResponseDto(shortestPath.getVertexList());
   }
 
+  /**
+   * Finds the shortest path between the origin and destination.
+   * Dijkstra algorithm is used as the graph is un-oriented and un-weighted with single source vertex.
+   */
   private GraphPath<String, DefaultEdge> getDijkstraShortestPath(String origin, String destination) {
     UndirectedGraph<String, DefaultEdge> countriesGraph = countryService.getCountriesGraph();
     DijkstraShortestPath<String, DefaultEdge> dijkstraShortestPath = new DijkstraShortestPath<>(countriesGraph);

@@ -6,6 +6,6 @@ package com.challenge.countries.exception;
 public class CountryNotFoundException extends RuntimeException {
 
   public CountryNotFoundException(String countryCode) {
-    super(String.format("Could not find a country with code '%s'", countryCode));
+    super(String.format("Could not find a country with code %s", countryCode));
   }
 }

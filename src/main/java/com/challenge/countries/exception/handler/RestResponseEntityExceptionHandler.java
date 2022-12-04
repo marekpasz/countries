@@ -36,7 +36,7 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
    */
   @ResponseBody
   @ExceptionHandler({RouteNotFoundException.class, CountryNotFoundException.class})
-  ResponseEntity<Map<String, String>> routeNotFoundException(RuntimeException runtimeException) {
+  ResponseEntity<Map<String, String>> customException(RuntimeException runtimeException) {
     return ResponseEntity.badRequest().body(Collections.singletonMap("message", runtimeException.getMessage()));
   }
 }

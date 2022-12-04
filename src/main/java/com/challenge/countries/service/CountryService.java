@@ -10,6 +10,7 @@ import javax.annotation.PostConstruct;
 import org.jgrapht.UndirectedGraph;
 import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.SimpleGraph;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,9 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class CountryService {
+
+  @Value("${countriesJson.path}")
+  private String countriesJsonPath;
 
   private final UndirectedGraph<String, DefaultEdge> countriesGraph = new SimpleGraph<>(DefaultEdge.class);
 
@@ -29,7 +33,7 @@ public class CountryService {
   }
 
   private List<Country> getAllCountries() throws IOException {
-    File countriesJsonFile = new ClassPathResource("static/countries.json").getFile();
+    File countriesJsonFile = new ClassPathResource(countriesJsonPath).getFile();
 
     ObjectMapper mapper = new ObjectMapper();
     return mapper.readValue(countriesJsonFile, new TypeReference<>() {});
