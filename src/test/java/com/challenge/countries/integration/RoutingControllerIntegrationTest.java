@@ -22,8 +22,7 @@ class RoutingControllerIntegrationTest {
 
   @Test
   void whenGetRouteByOriginAndDestination_thenShortestPathIsReturned() throws Exception {
-    mockMvc.perform(get("/routing/CZE/ITA")
-        .contentType(APPLICATION_JSON))
+    mockMvc.perform(get("/routing/CZE/ITA"))
         .andExpect(status().isOk())
         .andExpect((jsonPath("$.route", hasSize(3))))
         .andExpect(jsonPath("$.route", containsInRelativeOrder("CZE", "AUT", "ITA")));
@@ -31,8 +30,7 @@ class RoutingControllerIntegrationTest {
 
   @Test
   void givenSameCountryOriginAndDestination_whenGetRouteByOriginAndDestination_thenReturnJustOneCountry() throws Exception {
-    mockMvc.perform(get("/routing/CZE/CZE")
-        .contentType(APPLICATION_JSON))
+    mockMvc.perform(get("/routing/CZE/CZE"))
         .andExpect(status().isOk())
         .andExpect((jsonPath("$.route", hasSize(1))))
         .andExpect(jsonPath("$.route").value("CZE"));
@@ -40,8 +38,7 @@ class RoutingControllerIntegrationTest {
 
   @Test
   void givenNoLandRouteBetweenCountries_whenGetRouteByOriginAndDestination_thenBadRequestReturned() throws Exception {
-    mockMvc.perform(get("/routing/CZE/USA")
-        .contentType(APPLICATION_JSON))
+    mockMvc.perform(get("/routing/CZE/USA"))
         .andExpect(status().isBadRequest())
         .andExpect((jsonPath("$.message").value("Could not find a land route between CZE and USA")));
   }
