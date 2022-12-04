@@ -3,6 +3,8 @@ package com.challenge.countries.service;
 import com.challenge.countries.exception.CountryNotFoundException;
 import java.util.Objects;
 import javax.inject.Inject;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.jgrapht.UndirectedGraph;
 import org.jgrapht.graph.DefaultEdge;
 import org.springframework.stereotype.Service;
@@ -12,6 +14,8 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class ValidationService {
+  private static final Logger logger = LogManager.getLogger();
+
   private final CountryService countryService;
 
   @Inject
@@ -28,6 +32,7 @@ public class ValidationService {
   public void checkCountryExists(String country) {
     UndirectedGraph<String, DefaultEdge> countriesGraph = countryService.getCountriesGraph();
     if (Objects.isNull(countriesGraph) || !countriesGraph.containsVertex(country)) {
+      logger.error("Could not find country code: {}", country);
       throw new CountryNotFoundException(country);
     }
   }

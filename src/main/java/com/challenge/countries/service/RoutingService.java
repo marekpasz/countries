@@ -43,6 +43,7 @@ public class RoutingService {
 
     GraphPath<String, DefaultEdge> shortestPath = getDijkstraShortestPath(origin, destination);
     if (Objects.isNull(shortestPath)) {
+      logger.error("Could not find land route between {} and {}", origin, destination);
       throw new RouteNotFoundException(origin, destination);
     }
 
