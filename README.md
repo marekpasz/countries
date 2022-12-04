@@ -5,14 +5,15 @@ As a prerequisite you need to have installed Java 11 and Apache Maven 3+.
 After the installation you can check in the terminal with command `java -version` and `mvn -v`.
 
 ### Docker
-To run the application, docker must be installed.
+To run the application, Docker (or Podman) must be installed.
 You can verify that docker is installed correctly with command `docker -v`.
 
 ## Running the application
 1. You need to open the terminal pointing to the project directory.
 2. Run the command `mvn clean install`
 3. Run the command: `docker-compose up --build`.
-The application will start on port **8080**.
+The application will start on port **8080**. Server is successfully started when following line appears:
+`Server startup in [  ] milliseconds.`
 
 ## Endpoint
 You can use any tool to call the 'routing' endpoint of the 'countries' application (e.g. Postman, Insomnia, any browser).
